@@ -23,6 +23,8 @@ describe('Collecting Data', () => {
 				.then(($el) => _.slice($el).map((x) => x.value))
 		);
 
+		cy.writeFile(`data/stations.json`, stations);
+
 		stations.forEach(async (station, index) => {
 			cy.wait(500);
 			cy.get('select#station_name').select(station);
