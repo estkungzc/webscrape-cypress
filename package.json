@@ -1,0 +1,26 @@
+{
+  "name": "webscrape-cypress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cypress": "node_modules\\.bin\\cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/estkungzc/webscrape-cypress.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/estkungzc/webscrape-cypress/issues"
+  },
+  "homepage": "https://github.com/estkungzc/webscrape-cypress#readme",
+  "devDependencies": {
+    "cypress": "^7.3.0"
+  },
+  "dependencies": {
+    "cypress-promise": "^1.1.0"
+  }
+}
