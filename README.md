@@ -52,8 +52,3 @@ After; where `02t` is a station id
     ├── ...
     ├── package.json
     └── README.md
-    ````
-
-```
-
-```
