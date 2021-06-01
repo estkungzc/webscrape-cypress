@@ -9,22 +9,27 @@ describe('Collecting Data', () => {
 	});
 
 	it('Creating the json data', async () => {
+		// Get all parameters
 		const params = await promisify(
 			cy
 				.get('select#parameter_name option')
 				.then(($el) => _.slice($el).map((x) => x.value))
 		);
 
+		// Select all parameters
 		await promisify(cy.get('select#parameter_name').select(params));
 
+		// Get all stations
 		let stations = await promisify(
 			cy
 				.get('select#station_name option')
 				.then(($el) => _.slice($el).map((x) => x.value))
 		);
 
+		// Write all stations to json file
 		cy.writeFile(`data/stations.json`, stations);
 
+		// Get all data(params) each stations
 		stations.forEach(async (station, index) => {
 			cy.wait(500);
 			cy.get('select#station_name').select(station);
@@ -32,6 +37,7 @@ describe('Collecting Data', () => {
 			// Click this button to show data table
 			cy.contains('ตาราง Table').click();
 
+			// Get pages number
 			const pages = await promisify(
 				cy.get('ul.pagination li').then(($li) => {
 					const pagesElement = $li[$li.length - 2];
@@ -40,6 +46,7 @@ describe('Collecting Data', () => {
 				})
 			);
 
+			// Get column of table
 			const cols = await promisify(
 				cy.get('table#table1 thead tr').then(($tr) => {
 					const rowElement = $tr.get(0);
@@ -51,6 +58,8 @@ describe('Collecting Data', () => {
 			cy.wait(500);
 
 			let results = [];
+
+			// Get data in each page and store in results
 			for (let index = 0; index < pages; index++) {
 				// const element = array[index];
 
@@ -81,6 +90,7 @@ describe('Collecting Data', () => {
 			}
 			console.log(results);
 
+			// Finally write results to json file
 			cy.writeFile(`data/${stations[index]}.json`, results);
 			// cy.wait(300);
 		});
